@@ -9,6 +9,8 @@ development/*
 !development/installer.py
 !development/apps-example.json
 !development/vscode-example/
+apps.json
+gitops
 
 # Pycharm
 .idea
