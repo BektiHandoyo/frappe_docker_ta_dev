@@ -38,7 +38,7 @@ echo "🧹 Membersihkan container lama (jika ada)..."
 docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml down
 
 echo "🚚 Menyalakan container..."
-docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml up -d --pull never --remove-orphans
+docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml up -d  --remove-orphans
 
 echo "✅ Berhasil dijalankan!"
 echo "📍 Nama Project: $PROJECT_NAME_FINAL"
