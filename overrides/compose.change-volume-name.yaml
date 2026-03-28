@@ -1,0 +1,33 @@
+name: ${PROJECT_NAME:-frappe-default}
+networks:
+  default:
+    name: ${PROJECT_NAME:-frappe-default}_default
+
+volumes:
+  db-data:
+    name: ${PROJECT_NAME:-frappe-default}_db-data
+  redis-queue-data:
+    name: ${PROJECT_NAME:-frappe-default}_redis-queue-data
+  sites:
+    name: ${PROJECT_NAME:-frappe-default}_sites
+
+services:
+  # Solusi 1: Pemetaan Port ke 80 (Standard HTTP)
+  frontend:
+    ports:
+    environment:
+      # Solusi 2: Memberitahu Nginx nama domain yang benar
+      FRAPPE_SITE_NAME_HEADER: ta-dev.subekti.web.id
+      # Penting agar Nginx meneruskan IP asli & Protokol
+      UPSTREAM_REAL_IP_ADDRESS: 127.0.0.1
+      UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
+
+  # Tambahan untuk Backend agar sinkron dengan Frontend
+  backend:
+    environment:
+      FRAPPE_SITE_NAME_HEADER: ta-dev.subekti.web.id
+
+  # Tambahan untuk Websocket (agar Socket.io gak error)
+  websocket:
+    environment:
+      FRAPPE_SITE_NAME_HEADER: ta-dev.subekti.web.id

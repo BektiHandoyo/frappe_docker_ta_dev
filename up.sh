@@ -25,6 +25,7 @@ docker compose --env-file .env \
   -f overrides/compose.mariadb.yaml \
   -f overrides/compose.redis.yaml \
   -f overrides/compose.noproxy.yaml \
+  -f overrides/compose.change-volume-name.yaml \
   config > ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml
 
 if [ ! -s ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml ]; then
@@ -34,10 +35,10 @@ fi
 
 # --- 4. JALANKAN ---
 echo "🧹 Membersihkan container lama (jika ada)..."
-docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml down -v
+docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml down
 
 echo "🚚 Menyalakan container..."
-docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml up -d --pull never
+docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml up -d --pull never --remove-orphans
 
 echo "✅ Berhasil dijalankan!"
 echo "📍 Nama Project: $PROJECT_NAME_FINAL"

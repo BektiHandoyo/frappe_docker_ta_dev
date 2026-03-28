@@ -14,8 +14,8 @@ IMAGE_NAME=$(grep '^CUSTOM_IMAGE=' .env | cut -d '=' -f2 | sed 's/["'\'']//g')
 IMAGE_TAG=$(grep '^CUSTOM_TAG=' .env | cut -d '=' -f2 | sed 's/["'\'']//g')
 
 # Fallback jika di .env belum diisi
-IMAGE_NAME=${IMAGE_NAME:-"my-kantin-erpnext"}
-IMAGE_TAG=${IMAGE_TAG:-"latest"}
+IMAGE_NAME=${IMAGE_NAME:-"erpnext"}
+IMAGE_TAG=${IMAGE_TAG:-"version-15"}
 
 # --- 2. VALIDASI APPS.JSON ---
 if [ ! -f apps.json ]; then
