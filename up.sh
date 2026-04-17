@@ -40,6 +40,11 @@ docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_F
 echo "🚚 Menyalakan container..."
 docker compose --project-name "$PROJECT_NAME_FINAL" -f ./gitops/"$PROJECT_NAME_FINAL"/docker-compose.yml up -d  --remove-orphans
 
+echo "🔄 Menunggu container stabil sebelum restore Git..."
+sleep 5
+chmod +x restore_git.sh
+./restore_git.sh
+
 echo "✅ Berhasil dijalankan!"
 echo "📍 Nama Project: $PROJECT_NAME_FINAL"
 echo "🔍 Cek log dengan: docker compose -p $PROJECT_NAME_FINAL logs -f"
