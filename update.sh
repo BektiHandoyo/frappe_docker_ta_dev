@@ -33,6 +33,7 @@ docker compose -p "$PROJECT_NAME" exec -u frappe backend /bin/bash -c "
     cd apps/kantin_stemba
     git fetch origin
     git pull origin dev
+    bench setup requirements
     bench --site $SITE_NAME migrate
     bench --site $SITE_NAME clear-cache
 "
